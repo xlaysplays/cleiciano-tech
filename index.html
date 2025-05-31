@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cleiciano Eletrônicos</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: white;
+    }
+
+    header {
+      background-color: #0077cc;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    .menu-button {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      font-size: 28px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -220px;
+      width: 200px;
+      height: 100%;
+      background-color: #333;
+      padding-top: 60px;
+      transition: left 0.3s;
+      z-index: 1;
+    }
+
+    .sidebar a {
+      display: block;
+      color: white;
+      padding: 12px 20px;
+      text-decoration: none;
+      border-bottom: 1px solid #444;
+    }
+
+    .sidebar a:hover {
+      background-color: #575757;
+    }
+
+    .content {
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    section {
+      padding: 40px 0;
+    }
+
+    #principal { background: #f9f9f9; }
+    #loja { background: #eef6ff; }
+    #sobre { background: #f9f9f9; }
+    #config { background: #eef6ff; }
+
+    @media (max-width: 600px) {
+      header {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <button class="menu-button" onclick="toggleMenu()">☰</button>
+    Cleiciano Eletrônicos
+  </header>
+
+  <div class="sidebar" id="sidebar">
+    <a href="#principal">Principal</a>
+    <a href="#loja">Loja</a>
+    <a href="#sobre">Sobre Nós</a>
+    <a href="#config">Configurações</a>
+  </div>
+
+  <div class="content">
+    <section id="principal">
+      <h2>Bem-vindo à Cleiciano Eletrônicos</h2>
+      <p>Seu lugar para tecnologia e inovação!</p>
+    </section>
+
+    <section id="loja">
+      <h2>Loja</h2>
+      <p>Explore nossos produtos eletrônicos de qualidade!</p>
+    </section>
+
+    <section id="sobre">
+      <h2>Sobre Nós</h2>
+      <p>Somos uma loja dedicada a trazer as melhores soluções tecnológicas para você.</p>
+    </section>
+
+    <section id="config">
+      <h2>Configurações</h2>
+      <p>Em breve você poderá personalizar sua experiência!</p>
+    </section>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("sidebar");
+      if (menu.style.left === "0px") {
+        menu.style.left = "-220px";
+      } else {
+        menu.style.left = "0px";
+      }
+    }
+
+    // Navegação suave
+    document.querySelectorAll('.sidebar a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        window.scrollTo({
+          top: target.offsetTop - 50,
+          behavior: 'smooth'
+        });
+        toggleMenu();
+      });
+    });
+  </script>
+
+</body>
+</html>
