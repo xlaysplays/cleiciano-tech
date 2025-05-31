@@ -3,139 +3,157 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cleiciano Eletrônicos</title>
+  <title>Cleiciano Tech</title>
   <style>
     body {
       margin: 0;
-      font-family: sans-serif;
+      font-family: Arial, sans-serif;
       background: white;
     }
 
     header {
-      background-color: #0077cc;
+      background: #0077cc;
       color: white;
       padding: 20px;
-      text-align: center;
-      font-size: 24px;
-      position: sticky;
-      top: 0;
-      z-index: 2;
+      position: relative;
+    }
+
+    header h1 {
+      margin: 0;
     }
 
     .menu-button {
       position: absolute;
-      top: 15px;
-      left: 15px;
-      font-size: 28px;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
       background: none;
       border: none;
       color: white;
       cursor: pointer;
     }
 
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: -220px;
-      width: 200px;
-      height: 100%;
-      background-color: #333;
-      padding-top: 60px;
-      transition: left 0.3s;
-      z-index: 1;
+    nav {
+      display: none;
+      flex-direction: column;
+      background-color: #eee;
+      padding: 10px;
     }
 
-    .sidebar a {
-      display: block;
-      color: white;
-      padding: 12px 20px;
+    nav a {
+      padding: 10px;
       text-decoration: none;
-      border-bottom: 1px solid #444;
+      color: #0077cc;
+      border-bottom: 1px solid #ccc;
     }
 
-    .sidebar a:hover {
-      background-color: #575757;
-    }
-
-    .content {
-      padding: 20px;
-      margin-top: 20px;
+    nav a:hover {
+      background-color: #ddd;
     }
 
     section {
-      padding: 40px 0;
+      padding: 20px;
     }
 
-    #principal { background: #f9f9f9; }
-    #loja { background: #eef6ff; }
-    #sobre { background: #f9f9f9; }
-    #config { background: #eef6ff; }
+    .produtos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
 
-    @media (max-width: 600px) {
-      header {
-        font-size: 20px;
-      }
+    .produto {
+      flex: 1 1 200px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      background: white;
+    }
+
+    .produto img {
+      width: 100%;
+      border-radius: 4px;
+    }
+
+    .produto button {
+      padding: 8px 16px;
+      background: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .produto button:hover {
+      background: #005fa3;
     }
   </style>
 </head>
 <body>
 
   <header>
+    <h1>Cleiciano Tech</h1>
     <button class="menu-button" onclick="toggleMenu()">☰</button>
-    Cleiciano Eletrônicos
+    <nav id="menu">
+      <a href="#principal">Principal</a>
+      <a href="#loja">Loja</a>
+      <a href="#sobre">Sobre Nós</a>
+      <a href="#config">Configurações</a>
+    </nav>
   </header>
 
-  <div class="sidebar" id="sidebar">
-    <a href="#principal">Principal</a>
-    <a href="#loja">Loja</a>
-    <a href="#sobre">Sobre Nós</a>
-    <a href="#config">Configurações</a>
-  </div>
+  <section id="principal">
+    <h2>Bem-vindo à Cleiciano Tech!</h2>
+    <p>Os melhores eletrônicos com os melhores preços.</p>
+  </section>
 
-  <div class="content">
-    <section id="principal">
-      <h2>Bem-vindo à Cleiciano Eletrônicos</h2>
-      <p>Seu lugar para tecnologia e inovação!</p>
-    </section>
+  <section id="loja">
+    <h2>Loja</h2>
+    <p>Confira nossos produtos:</p>
+    <div class="produtos">
+      <div class="produto">
+        <img src="https://via.placeholder.com/150" alt="Fone de Ouvido">
+        <h3>Fone de Ouvido</h3>
+        <p>R$ 99,00</p>
+        <button onclick="alert('Você clicou em Comprar Fone de Ouvido')">Comprar</button>
+      </div>
 
-    <section id="loja">
-      <h2>Loja</h2>
-      <p>Explore nossos produtos eletrônicos de qualidade!</p>
-    </section>
+      <div class="produto">
+        <img src="https://via.placeholder.com/150" alt="Caixa de Som">
+        <h3>Caixa de Som</h3>
+        <p>R$ 149,00</p>
+        <button onclick="alert('Você clicou em Comprar Caixa de Som')">Comprar</button>
+      </div>
 
-    <section id="sobre">
-      <h2>Sobre Nós</h2>
-      <p>Somos uma loja dedicada a trazer as melhores soluções tecnológicas para você.</p>
-    </section>
+      <div class="produto">
+        <img src="https://via.placeholder.com/150" alt="Carregador Rápido">
+        <h3>Carregador Rápido</h3>
+        <p>R$ 59,00</p>
+        <button onclick="alert('Você clicou em Comprar Carregador')">Comprar</button>
+      </div>
+    </div>
+  </section>
 
-    <section id="config">
-      <h2>Configurações</h2>
-      <p>Em breve você poderá personalizar sua experiência!</p>
-    </section>
-  </div>
+  <section id="sobre">
+    <h2>Sobre Nós</h2>
+    <p>A Cleiciano Tech é uma loja de eletrônicos com foco em qualidade e bom atendimento. Fundada por Cleiciano, oferecemos os melhores produtos do mercado!</p>
+  </section>
+
+  <section id="config">
+    <h2>Configurações</h2>
+    <p>Aqui futuramente você poderá personalizar sua experiência.</p>
+  </section>
 
   <script>
     function toggleMenu() {
-      const menu = document.getElementById("sidebar");
-      if (menu.style.left === "0px") {
-        menu.style.left = "-220px";
+      const menu = document.getElementById('menu');
+      if (menu.style.display === 'flex') {
+        menu.style.display = 'none';
       } else {
-        menu.style.left = "0px";
+        menu.style.display = 'flex';
       }
     }
-
-    // Navegação suave
-    document.querySelectorAll('.sidebar a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        window.scrollTo({
-          top: target.offsetTop - 50,
-          behavior: 'smooth'
-        });
-        toggleMenu();
-      });
-    });
   </script>
 
 </body>
