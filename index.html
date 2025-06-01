@@ -2,36 +2,30 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cleiciano Tech</title>
   <style>
-    :root {
-      --cor-principal: #0077cc;
-      --fonte: Arial, sans-serif;
-    }
-
     body {
       margin: 0;
-      font-family: var(--fonte);
+      font-family: Arial, sans-serif;
       background: white;
     }
 
     header {
-      background: var(--cor-principal);
+      background: #0077cc;
       color: white;
       padding: 20px;
       position: relative;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
     }
 
     header h1 {
       margin: 0;
-      font-size: 24px;
     }
 
     .menu-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
       font-size: 24px;
       background: none;
       border: none;
@@ -43,12 +37,13 @@
       display: none;
       flex-direction: column;
       background-color: #eee;
+      padding: 10px;
     }
 
     nav a {
       padding: 10px;
       text-decoration: none;
-      color: var(--cor-principal);
+      color: #0077cc;
       border-bottom: 1px solid #ccc;
     }
 
@@ -82,7 +77,7 @@
 
     .produto button {
       padding: 8px 16px;
-      background: var(--cor-principal);
+      background: #0077cc;
       color: white;
       border: none;
       border-radius: 4px;
@@ -94,16 +89,34 @@
       background: #005fa3;
     }
 
-    .config-inputs label {
-      display: block;
-      margin-top: 10px;
+    .form-box {
+      max-width: 400px;
+      margin: 50px auto;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 8px;
+      background: #f9f9f9;
     }
 
-    #login-form, #main-content {
-      display: none;
+    .form-box input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
 
-    @media (max-width: 600px) {
+    .form-box button {
+      width: 100%;
+      padding: 10px;
+      background: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: 600px) {
       .produtos {
         flex-direction: column;
       }
@@ -112,136 +125,117 @@
 </head>
 <body>
 
+<div id="authSection">
+  <div class="form-box">
+    <h2>Registrar</h2>
+    <input type="text" id="registerUsername" placeholder="Nome de usuário">
+    <input type="password" id="registerPassword" placeholder="Senha">
+    <button onclick="registerUser()">Registrar</button>
+    <hr>
+    <h2>Login</h2>
+    <input type="text" id="loginUsername" placeholder="Nome de usuário">
+    <input type="password" id="loginPassword" placeholder="Senha">
+    <button onclick="loginUser()">Login</button>
+  </div>
+</div>
+
+<div id="mainSite" style="display: none;">
   <header>
     <h1>Cleiciano Tech</h1>
-    <div id="user-display"></div>
     <button class="menu-button" onclick="toggleMenu()">☰</button>
+    <nav id="menu">
+      <a href="#principal">Principal</a>
+      <a href="#loja">Loja</a>
+      <a href="#sobre">Sobre Nós</a>
+      <a href="#config">Configurações</a>
+    </nav>
   </header>
-  <nav id="menu">
-    <a href="#principal">Principal</a>
-    <a href="#loja">Loja</a>
-    <a href="#sobre">Sobre</a>
-    <a href="#config">Configurações</a>
-  </nav>
 
-  <section id="login-form">
-    <h2>Login ou Registro</h2>
-    <input type="text" id="usuario" placeholder="Usuário"><br>
-    <input type="password" id="senha" placeholder="Senha"><br><br>
-    <button onclick="registrar()">Registrar</button>
-    <button onclick="login()">Login</button>
+  <section id="principal">
+    <h2>Bem-vindo à Cleiciano Tech!</h2>
+    <p>Os melhores eletrônicos com os melhores preços.</p>
   </section>
 
-  <section id="main-content">
-    <section id="principal">
-      <h2>Bem-vindo à Cleiciano Tech!</h2>
-      <p>Os melhores eletrônicos com os melhores preços.</p>
-    </section>
-
-    <section id="loja">
-      <h2>Loja</h2>
-      <div class="produtos">
-        <div class="produto">
-          <img src="https://i.ibb.co/23Hqw9Qp/download-1.jpg" alt="Fone de Ouvido">
-          <h3>Fone de Ouvido</h3>
-          <p>R$ 99,00</p>
-          <button onclick="adicionarCarrinho('Fone de Ouvido')">Comprar</button>
-        </div>
-
-        <div class="produto">
-          <img src="https://i.ibb.co/n9NGQmj/images.jpg" alt="Caixa de Som">
-          <h3>Caixa de Som</h3>
-          <p>R$ 149,00</p>
-          <button onclick="adicionarCarrinho('Caixa de Som')">Comprar</button>
-        </div>
-
-        <div class="produto">
-          <img src="https://i.ibb.co/XfFXPhdk/images-3.jpg" alt="Carregador Rápido">
-          <h3>Carregador Rápido</h3>
-          <p>R$ 59,00</p>
-          <button onclick="adicionarCarrinho('Carregador Rápido')">Comprar</button>
-        </div>
+  <section id="loja">
+    <h2>Loja</h2>
+    <div class="produtos">
+      <div class="produto">
+        <img src="https://i.ibb.co/23Hqw9Qp/download-1.jpg" alt="Fone de Ouvido">
+        <h3>Fone de Ouvido</h3>
+        <p>R$ 99,00</p>
+        <button onclick="alert('Você clicou em Comprar Fone de Ouvido')">Comprar</button>
       </div>
-      <h3>Carrinho:</h3>
-      <ul id="carrinho"></ul>
-    </section>
 
-    <section id="sobre">
-      <h2>Sobre Nós</h2>
-      <p>A Cleiciano Tech é uma loja de eletrônicos com foco em qualidade e bom atendimento. Fundada por Cleiciano, oferecemos os melhores produtos do mercado!</p>
-    </section>
-
-    <section id="config">
-      <h2>Configurações</h2>
-      <div class="config-inputs">
-        <label>Tema:
-          <select onchange="mudarTema(this.value)">
-            <option value="#0077cc">Azul</option>
-            <option value="#cc0000">Vermelho</option>
-            <option value="#800080">Roxo</option>
-          </select>
-        </label>
-
-        <label>Fonte:
-          <select onchange="mudarFonte(this.value)">
-            <option value="Arial">Arial</option>
-            <option value="Verdana">Verdana</option>
-            <option value="Courier New">Courier New</option>
-          </select>
-        </label>
+      <div class="produto">
+        <img src="https://i.ibb.co/n9NGQmj/images.jpg" alt="Caixa de Som">
+        <h3>Caixa de Som</h3>
+        <p>R$ 149,00</p>
+        <button onclick="alert('Você clicou em Comprar Caixa de Som')">Comprar</button>
       </div>
-    </section>
+
+      <div class="produto">
+        <img src="https://i.ibb.co/XfFXPhdk/images-3.jpg" alt="Carregador Rápido">
+        <h3>Carregador Rápido</h3>
+        <p>R$ 59,00</p>
+        <button onclick="alert('Você clicou em Comprar Carregador')">Comprar</button>
+      </div>
+    </div>
   </section>
 
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById('menu');
-      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-    }
+  <section id="sobre">
+    <h2>Sobre Nós</h2>
+    <p>A Cleiciano Tech é uma loja de eletrônicos com foco em qualidade e bom atendimento. Fundada por Cleiciano, oferecemos os melhores produtos do mercado!</p>
+  </section>
 
-    function mudarTema(cor) {
-      document.documentElement.style.setProperty('--cor-principal', cor);
-    }
+  <section id="config">
+    <h2>Configurações</h2>
+    <p>Aqui futuramente você poderá personalizar sua experiência.</p>
+  </section>
+</div>
 
-    function mudarFonte(fonte) {
-      document.documentElement.style.setProperty('--fonte', fonte);
-    }
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+  }
 
-    function adicionarCarrinho(produto) {
-      const li = document.createElement('li');
-      li.textContent = produto;
-      document.getElementById('carrinho').appendChild(li);
+  function registerUser() {
+    const user = document.getElementById('registerUsername').value;
+    const pass = document.getElementById('registerPassword').value;
+    if (user && pass) {
+      localStorage.setItem('clei_user', user);
+      localStorage.setItem('clei_pass', pass);
+      alert('Registrado com sucesso!');
+      showMainSite();
+    } else {
+      alert('Preencha nome e senha!');
     }
+  }
 
-    function registrar() {
-      const user = document.getElementById('usuario').value;
-      const senha = document.getElementById('senha').value;
-      if (user && senha) {
-        localStorage.setItem('user', user);
-        localStorage.setItem('senha', senha);
-        alert('Registrado com sucesso!');
-      }
+  function loginUser() {
+    const user = document.getElementById('loginUsername').value;
+    const pass = document.getElementById('loginPassword').value;
+    if (user === localStorage.getItem('clei_user') && pass === localStorage.getItem('clei_pass')) {
+      alert('Login feito com sucesso!');
+      showMainSite();
+    } else {
+      alert('Usuário ou senha incorretos.');
     }
+  }
 
-    function login() {
-      const user = document.getElementById('usuario').value;
-      const senha = document.getElementById('senha').value;
-      const regUser = localStorage.getItem('user');
-      const regSenha = localStorage.getItem('senha');
-      if (user === regUser && senha === regSenha) {
-        document.getElementById('login-form').style.display = 'none';
-        document.getElementById('main-content').style.display = 'block';
-        document.getElementById('user-display').textContent = `Bem-vindo, ${user}!`;
-      } else {
-        alert('Usuário ou senha incorretos.');
-      }
-    }
+  function showMainSite() {
+    document.getElementById('authSection').style.display = 'none';
+    document.getElementById('mainSite').style.display = 'block';
+  }
 
-    // Mostrar login ao carregar
-    window.onload = () => {
-      document.getElementById('login-form').style.display = 'block';
+  // Auto login if already registered
+  window.onload = () => {
+    if (localStorage.getItem('clei_user')) {
+      showMainSite();
     }
-  </script>
+  }
+</script>
 
 </body>
-</html>
+  </html>
+  
