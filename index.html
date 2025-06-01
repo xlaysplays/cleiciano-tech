@@ -2,26 +2,18 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cleiciano Tech</title>
   <style>
     :root {
       --cor-principal: #0077cc;
-      --cor-fundo: white;
-      --cor-texto: black;
-      --fonte-base: Arial, sans-serif;
-    }
-
-    body.dark-mode {
-      --cor-fundo: #121212;
-      --cor-texto: #f1f1f1;
+      --fonte: Arial, sans-serif;
     }
 
     body {
       margin: 0;
-      font-family: var(--fonte-base);
-      background: var(--cor-fundo);
-      color: var(--cor-texto);
+      font-family: var(--fonte);
+      background: white;
     }
 
     header {
@@ -29,16 +21,17 @@
       color: white;
       padding: 20px;
       position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     header h1 {
       margin: 0;
+      font-size: 24px;
     }
 
     .menu-button {
-      position: absolute;
-      top: 20px;
-      right: 20px;
       font-size: 24px;
       background: none;
       border: none;
@@ -50,7 +43,6 @@
       display: none;
       flex-direction: column;
       background-color: #eee;
-      padding: 10px;
     }
 
     nav a {
@@ -102,21 +94,13 @@
       background: #005fa3;
     }
 
-    label {
+    .config-inputs label {
       display: block;
       margin-top: 10px;
     }
 
-    input, select {
-      padding: 5px;
-      margin-top: 5px;
-    }
-
-    .carrinho {
-      background: #f9f9f9;
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-top: 20px;
+    #login-form, #main-content {
+      display: none;
     }
 
     @media (max-width: 600px) {
@@ -127,85 +111,86 @@
   </style>
 </head>
 <body>
+
   <header>
     <h1>Cleiciano Tech</h1>
+    <div id="user-display"></div>
     <button class="menu-button" onclick="toggleMenu()">☰</button>
-    <nav id="menu">
-      <a href="#principal">Principal</a>
-      <a href="#loja">Loja</a>
-      <a href="#sobre">Sobre</a>
-      <a href="#config">Configurações</a>
-      <a href="#login">Login</a>
-    </nav>
   </header>
+  <nav id="menu">
+    <a href="#principal">Principal</a>
+    <a href="#loja">Loja</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#config">Configurações</a>
+  </nav>
 
-  <section id="principal">
-    <h2>Bem-vindo à Cleiciano Tech!</h2>
-    <p>Os melhores eletrônicos com os melhores preços.</p>
+  <section id="login-form">
+    <h2>Login ou Registro</h2>
+    <input type="text" id="usuario" placeholder="Usuário"><br>
+    <input type="password" id="senha" placeholder="Senha"><br><br>
+    <button onclick="registrar()">Registrar</button>
+    <button onclick="login()">Login</button>
   </section>
 
-  <section id="loja">
-    <h2>Loja</h2>
-    <div class="produtos">
-      <div class="produto">
-        <img src="https://i.ibb.co/23Hqw9Qp/download-1.jpg" alt="Fone de Ouvido">
-        <h3>Fone de Ouvido</h3>
-        <p>R$ 99,00</p>
-        <button onclick="adicionarCarrinho('Fone de Ouvido')">Comprar</button>
+  <section id="main-content">
+    <section id="principal">
+      <h2>Bem-vindo à Cleiciano Tech!</h2>
+      <p>Os melhores eletrônicos com os melhores preços.</p>
+    </section>
+
+    <section id="loja">
+      <h2>Loja</h2>
+      <div class="produtos">
+        <div class="produto">
+          <img src="https://i.ibb.co/23Hqw9Qp/download-1.jpg" alt="Fone de Ouvido">
+          <h3>Fone de Ouvido</h3>
+          <p>R$ 99,00</p>
+          <button onclick="adicionarCarrinho('Fone de Ouvido')">Comprar</button>
+        </div>
+
+        <div class="produto">
+          <img src="https://i.ibb.co/n9NGQmj/images.jpg" alt="Caixa de Som">
+          <h3>Caixa de Som</h3>
+          <p>R$ 149,00</p>
+          <button onclick="adicionarCarrinho('Caixa de Som')">Comprar</button>
+        </div>
+
+        <div class="produto">
+          <img src="https://i.ibb.co/XfFXPhdk/images-3.jpg" alt="Carregador Rápido">
+          <h3>Carregador Rápido</h3>
+          <p>R$ 59,00</p>
+          <button onclick="adicionarCarrinho('Carregador Rápido')">Comprar</button>
+        </div>
       </div>
-      <div class="produto">
-        <img src="https://i.ibb.co/n9NGQmj/images.jpg" alt="Caixa de Som">
-        <h3>Caixa de Som</h3>
-        <p>R$ 149,00</p>
-        <button onclick="adicionarCarrinho('Caixa de Som')">Comprar</button>
-      </div>
-      <div class="produto">
-        <img src="https://i.ibb.co/XfFXPhdk/images-3.jpg" alt="Carregador Rápido">
-        <h3>Carregador Rápido</h3>
-        <p>R$ 59,00</p>
-        <button onclick="adicionarCarrinho('Carregador Rápido')">Comprar</button>
-      </div>
-    </div>
-    <div class="carrinho" id="carrinho">
       <h3>Carrinho:</h3>
-      <ul id="listaCarrinho"></ul>
-    </div>
-  </section>
+      <ul id="carrinho"></ul>
+    </section>
 
-  <section id="sobre">
-    <h2>Sobre Nós</h2>
-    <p>A Cleiciano Tech é uma loja de eletrônicos com foco em qualidade e bom atendimento. Fundada por Cleiciano, oferecemos os melhores produtos do mercado!</p>
-  </section>
+    <section id="sobre">
+      <h2>Sobre Nós</h2>
+      <p>A Cleiciano Tech é uma loja de eletrônicos com foco em qualidade e bom atendimento. Fundada por Cleiciano, oferecemos os melhores produtos do mercado!</p>
+    </section>
 
-  <section id="config">
-    <h2>Configurações</h2>
-    <label>
-      <input type="checkbox" onchange="alternarModoEscuro(this)" /> Modo Escuro
-    </label>
-    <label>
-      Tema de cor:
-      <select onchange="mudarTema(this.value)">
-        <option value="#0077cc">Azul</option>
-        <option value="#cc0000">Vermelho</option>
-        <option value="#6a0dad">Roxo</option>
-      </select>
-    </label>
-    <label>
-      Fonte:
-      <select onchange="mudarFonte(this.value)">
-        <option value="Arial">Arial</option>
-        <option value="Verdana">Verdana</option>
-        <option value="Courier New">Courier New</option>
-      </select>
-    </label>
-  </section>
+    <section id="config">
+      <h2>Configurações</h2>
+      <div class="config-inputs">
+        <label>Tema:
+          <select onchange="mudarTema(this.value)">
+            <option value="#0077cc">Azul</option>
+            <option value="#cc0000">Vermelho</option>
+            <option value="#800080">Roxo</option>
+          </select>
+        </label>
 
-  <section id="login">
-    <h2>Login Fictício</h2>
-    <label>Usuário: <input type="text" id="usuario"></label>
-    <label>Senha: <input type="password" id="senha"></label>
-    <button onclick="fazerLogin()">Entrar</button>
-    <p id="mensagemLogin"></p>
+        <label>Fonte:
+          <select onchange="mudarFonte(this.value)">
+            <option value="Arial">Arial</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Courier New">Courier New</option>
+          </select>
+        </label>
+      </div>
+    </section>
   </section>
 
   <script>
@@ -214,53 +199,49 @@
       menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
     }
 
-    function alternarModoEscuro(checkbox) {
-      document.body.classList.toggle('dark-mode', checkbox.checked);
-      localStorage.setItem('modoEscuro', checkbox.checked);
-    }
-
     function mudarTema(cor) {
       document.documentElement.style.setProperty('--cor-principal', cor);
-      localStorage.setItem('corTema', cor);
     }
 
     function mudarFonte(fonte) {
-      document.documentElement.style.setProperty('--fonte-base', fonte);
-      localStorage.setItem('fonteSite', fonte);
-    }
-
-    function fazerLogin() {
-      const usuario = document.getElementById('usuario').value;
-      const senha = document.getElementById('senha').value;
-      const msg = document.getElementById('mensagemLogin');
-      if (usuario === 'admin' && senha === '123') {
-        msg.textContent = 'Login bem-sucedido!';
-        msg.style.color = 'green';
-      } else {
-        msg.textContent = 'Usuário ou senha incorretos.';
-        msg.style.color = 'red';
-      }
+      document.documentElement.style.setProperty('--fonte', fonte);
     }
 
     function adicionarCarrinho(produto) {
-      const lista = document.getElementById('listaCarrinho');
-      const item = document.createElement('li');
-      item.textContent = produto;
-      lista.appendChild(item);
+      const li = document.createElement('li');
+      li.textContent = produto;
+      document.getElementById('carrinho').appendChild(li);
     }
 
-    // Restaurar preferências
+    function registrar() {
+      const user = document.getElementById('usuario').value;
+      const senha = document.getElementById('senha').value;
+      if (user && senha) {
+        localStorage.setItem('user', user);
+        localStorage.setItem('senha', senha);
+        alert('Registrado com sucesso!');
+      }
+    }
+
+    function login() {
+      const user = document.getElementById('usuario').value;
+      const senha = document.getElementById('senha').value;
+      const regUser = localStorage.getItem('user');
+      const regSenha = localStorage.getItem('senha');
+      if (user === regUser && senha === regSenha) {
+        document.getElementById('login-form').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+        document.getElementById('user-display').textContent = `Bem-vindo, ${user}!`;
+      } else {
+        alert('Usuário ou senha incorretos.');
+      }
+    }
+
+    // Mostrar login ao carregar
     window.onload = () => {
-      const escuro = localStorage.getItem('modoEscuro') === 'true';
-      if (escuro) document.body.classList.add('dark-mode');
-
-      const tema = localStorage.getItem('corTema');
-      if (tema) mudarTema(tema);
-
-      const fonte = localStorage.getItem('fonteSite');
-      if (fonte) mudarFonte(fonte);
-    };
+      document.getElementById('login-form').style.display = 'block';
+    }
   </script>
+
 </body>
-      </html>
-  
+</html>
