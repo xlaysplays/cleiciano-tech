@@ -89,57 +89,56 @@
       background: #005fa3;
     }
 
-    .form-box {
-      max-width: 400px;
-      margin: 50px auto;
-      border: 1px solid #ccc;
-      padding: 20px;
-      border-radius: 8px;
+    #carrinho {
       background: #f9f9f9;
-    }
-
-    .form-box input {
-      width: 100%;
       padding: 10px;
-      margin-bottom: 10px;
       border: 1px solid #ccc;
-      border-radius: 4px;
+      margin-top: 20px;
+      border-radius: 8px;
     }
 
-    .form-box button {
-      width: 100%;
+    #carrinho ul {
+      padding-left: 20px;
+    }
+
+    .auth-section {
+      padding: 40px;
+      text-align: center;
+    }
+
+    .auth-section input {
+      margin: 5px;
       padding: 10px;
-      background: #0077cc;
+      width: 200px;
+    }
+
+    .auth-section button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      cursor: pointer;
+      background-color: #0077cc;
       color: white;
       border: none;
-      border-radius: 4px;
-      cursor: pointer;
+      border-radius: 5px;
     }
 
-    @media screen and (max-width: 600px) {
+    @media (max-width: 600px) {
       .produtos {
         flex-direction: column;
+      }
+
+      .menu-button {
+        font-size: 20px;
+      }
+
+      nav a {
+        padding: 8px;
       }
     }
   </style>
 </head>
 <body>
 
-<div id="authSection">
-  <div class="form-box">
-    <h2>Registrar</h2>
-    <input type="text" id="registerUsername" placeholder="Nome de usuário">
-    <input type="password" id="registerPassword" placeholder="Senha">
-    <button onclick="registerUser()">Registrar</button>
-    <hr>
-    <h2>Login</h2>
-    <input type="text" id="loginUsername" placeholder="Nome de usuário">
-    <input type="password" id="loginPassword" placeholder="Senha">
-    <button onclick="loginUser()">Login</button>
-  </div>
-</div>
-
-<div id="mainSite" style="display: none;">
   <header>
     <h1>Cleiciano Tech</h1>
     <button class="menu-button" onclick="toggleMenu()">☰</button>
@@ -151,91 +150,121 @@
     </nav>
   </header>
 
-  <section id="principal">
-    <h2>Bem-vindo à Cleiciano Tech!</h2>
-    <p>Os melhores eletrônicos com os melhores preços.</p>
-  </section>
+  <div id="login-register" class="auth-section">
+    <h2>Login ou Registro</h2>
+    <input type="text" id="username" placeholder="Nome de usuário" />
+    <input type="password" id="password" placeholder="Senha" /><br/>
+    <button onclick="register()">Registrar</button>
+    <button onclick="login()">Login</button>
+  </div>
 
-  <section id="loja">
-    <h2>Loja</h2>
-    <div class="produtos">
-      <div class="produto">
-        <img src="https://i.ibb.co/23Hqw9Qp/download-1.jpg" alt="Fone de Ouvido">
-        <h3>Fone de Ouvido</h3>
-        <p>R$ 99,00</p>
-        <button onclick="alert('Você clicou em Comprar Fone de Ouvido')">Comprar</button>
+  <div id="main-content" style="display: none;">
+
+    <section id="principal">
+      <h2>Bem-vindo à Cleiciano Tech!</h2>
+      <p>Os melhores eletrônicos com os melhores preços.</p>
+    </section>
+
+    <section id="loja">
+      <h2>Loja</h2>
+      <p>Confira nossos produtos:</p>
+      <div class="produtos">
+        <div class="produto">
+          <img src="https://i.ibb.co/23Hqw9Qp/download-1.jpg" alt="Fone de Ouvido">
+          <h3>Fone de Ouvido</h3>
+          <p>R$ 99,00</p>
+          <button onclick="adicionarCarrinho('Fone de Ouvido', 99)">Comprar</button>
+        </div>
+
+        <div class="produto">
+          <img src="https://i.ibb.co/n9NGQmj/images.jpg" alt="Caixa de Som">
+          <h3>Caixa de Som</h3>
+          <p>R$ 149,00</p>
+          <button onclick="adicionarCarrinho('Caixa de Som', 149)">Comprar</button>
+        </div>
+
+        <div class="produto">
+          <img src="https://i.ibb.co/XfFXPhdk/images-3.jpg" alt="Carregador Rápido">
+          <h3>Carregador Rápido</h3>
+          <p>R$ 59,00</p>
+          <button onclick="adicionarCarrinho('Carregador Rápido', 59)">Comprar</button>
+        </div>
       </div>
 
-      <div class="produto">
-        <img src="https://i.ibb.co/n9NGQmj/images.jpg" alt="Caixa de Som">
-        <h3>Caixa de Som</h3>
-        <p>R$ 149,00</p>
-        <button onclick="alert('Você clicou em Comprar Caixa de Som')">Comprar</button>
+      <div id="carrinho">
+        <h3>🧾 Carrinho de Compras</h3>
+        <ul id="lista-carrinho"></ul>
+        <p id="total">Total: R$ 0,00</p>
       </div>
+    </section>
 
-      <div class="produto">
-        <img src="https://i.ibb.co/XfFXPhdk/images-3.jpg" alt="Carregador Rápido">
-        <h3>Carregador Rápido</h3>
-        <p>R$ 59,00</p>
-        <button onclick="alert('Você clicou em Comprar Carregador')">Comprar</button>
-      </div>
-    </div>
-  </section>
+    <section id="sobre">
+      <h2>Sobre Nós</h2>
+      <p>A Cleiciano Tech é uma loja de eletrônicos com foco em qualidade e bom atendimento. Fundada por Cleiciano, oferecemos os melhores produtos do mercado!</p>
+    </section>
 
-  <section id="sobre">
-    <h2>Sobre Nós</h2>
-    <p>A Cleiciano Tech é uma loja de eletrônicos com foco em qualidade e bom atendimento. Fundada por Cleiciano, oferecemos os melhores produtos do mercado!</p>
-  </section>
+    <section id="config">
+      <h2>Configurações</h2>
+      <p>Aqui futuramente você poderá personalizar sua experiência.</p>
+    </section>
+  </div>
 
-  <section id="config">
-    <h2>Configurações</h2>
-    <p>Aqui futuramente você poderá personalizar sua experiência.</p>
-  </section>
-</div>
-
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById('menu');
-    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-  }
-
-  function registerUser() {
-    const user = document.getElementById('registerUsername').value;
-    const pass = document.getElementById('registerPassword').value;
-    if (user && pass) {
-      localStorage.setItem('clei_user', user);
-      localStorage.setItem('clei_pass', pass);
-      alert('Registrado com sucesso!');
-      showMainSite();
-    } else {
-      alert('Preencha nome e senha!');
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
     }
-  }
 
-  function loginUser() {
-    const user = document.getElementById('loginUsername').value;
-    const pass = document.getElementById('loginPassword').value;
-    if (user === localStorage.getItem('clei_user') && pass === localStorage.getItem('clei_pass')) {
-      alert('Login feito com sucesso!');
-      showMainSite();
-    } else {
-      alert('Usuário ou senha incorretos.');
+    // Sistema de Login e Registro
+    function register() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      if (user && pass) {
+        localStorage.setItem('usuario', user);
+        localStorage.setItem('senha', pass);
+        entrar();
+      } else {
+        alert('Preencha todos os campos');
+      }
     }
-  }
 
-  function showMainSite() {
-    document.getElementById('authSection').style.display = 'none';
-    document.getElementById('mainSite').style.display = 'block';
-  }
-
-  // Auto login if already registered
-  window.onload = () => {
-    if (localStorage.getItem('clei_user')) {
-      showMainSite();
+    function login() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      const savedUser = localStorage.getItem('usuario');
+      const savedPass = localStorage.getItem('senha');
+      if (user === savedUser && pass === savedPass) {
+        entrar();
+      } else {
+        alert('Usuário ou senha incorretos');
+      }
     }
-  }
-</script>
+
+    function entrar() {
+      document.getElementById('login-register').style.display = 'none';
+      document.getElementById('main-content').style.display = 'block';
+    }
+
+    // Carrinho de Compras
+    let carrinho = [];
+    function adicionarCarrinho(produto, preco) {
+      carrinho.push({ nome: produto, preco: preco });
+      atualizarCarrinho();
+    }
+
+    function atualizarCarrinho() {
+      const lista = document.getElementById('lista-carrinho');
+      lista.innerHTML = '';
+      let total = 0;
+      carrinho.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = `${item.nome} - R$ ${item.preco},00`;
+        lista.appendChild(li);
+        total += item.preco;
+      });
+      document.getElementById('total').textContent = `Total: R$ ${total},00`;
+    }
+  </script>
 
 </body>
-  </html>
-  
+</html>
